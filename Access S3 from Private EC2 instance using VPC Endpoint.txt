@@ -1,0 +1,48 @@
+Access S3 from Private EC2 instance using VPC Endpoint:
+==========================================================
+
+First we understand about what is Vpc endpoint
+
+VPC Endpoint allows us to securely connect our VPC and supported AWS services powered by AWS PrivateLink.
+
+AWS PrivateLink is a service that allows you to access AWS services by using private IP addresses. In this case, traffic does not leave Amazon’s network.
+
+VPC endpoint does not require a NAT Gateway, NAT instance, Internet Gateway, or any VPN services to access AWS Services.
+
+There are two types of VPC endpoints: 
+
+*Gateway
+*Interface.
+
+VPC endpoint for S3 comes under Gateway endpoint.
+
+When you create a VPC endpoint for S3, it asks for the Route table, then it adds the Prefix list to that route table. 
+You can’t modify/delete the entry present in the route table, created by Endpoint.
+
+Task Details
+=============
+1. Sign into AWS Management Console
+
+2. Created a custom VPC
+
+3. Created and attach an Internet Gateway with custom VPC
+
+4. Created a Public and Private Subnet
+
+5. Configured the Public subnet to enable auto-assign public IPv4 address
+
+6. Added an entry to the Internet (0.0.0.0/0) in the Main Route table.
+
+7. Created a Route Table for the Private subnet 
+
+8. Associated the Private subnet with the custom Route table i.e. RT for Private subnet
+
+9. Created a Bastion Host (Publicly accessible EC2 Instance)
+
+10.Created an Endpoint instance (Privately accessible EC2 instance)
+
+11.SSH into Endpoint instance (Privately accessible) through Bastion host
+
+12. Created a VPC endpoint for S3, attach it to the Private subnet's Route table.
+
+13. Able List all the S3 Bucket and its objects
